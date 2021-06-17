@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Node Auth 0 example</title>
+</head>
+
+<body>
+    <h1>Node + Express + Auth0 example</h1>
+
+    <br>
+    <h2 id="demo">
+
+    </h2>
+    <p>
+        Open <i>Developer tools</i> and go to your application tab and clear cookies,
+        session storage and local storage and then <b>click</b> the button.
+    </p>
+
+
+
+    <button id="myButton">Click me!</button>
+
+    <p>
+        Now open the console and u will see this cors error
+        <span style="color: red; font-size: x-large;"><code>Access to XMLHttpRequest at 'https://xxxxx.xxxxxx.com/authorize?client_id=xxxx&scope=openid%20profile%20email&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A30001%2Fcallback&nonce=nOsrMssqSF0BZEH4YPJ8Sv2Q-WWL_0M7bke8qaeMkC4&state=eyJyZXR1cm5UbyI6Ii9wcm9maWxlIn0&code_challenge_method=S256&code_challenge=nMg2BDdY4RvbK0mPmzYazSee4LbCQ0t05XI1ds5-1QM' 
+        (redirected from 'http://localhost:30001/profile') from origin 'http://localhost:30001' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+    </code> </span>
+    </p>
+
+    <p>
+        Sometimes it will give us an error like this
+        <span style="color: red; font-size: x-large;">
+            <code>
+                badrequesterror checks.state argument is missing
+            </code>
+            REF: <a href="https://community.auth0.com/t/badrequesterror-checks-state-argument-is-missing/42609"
+                target="_blank"> checks.state Error </a>
+        </span>
+    </p>
+    <!-- <button id="redire"> redirect </button> -->
+</body>
+<script>
+    var xhttp = new XMLHttpRequest();
+
+    console.log('Client-side code running');
+
+    const button = document.getElementById('myButton');
+    button.addEventListener('click', function (e) {
+        document.getElementById("demo").innerHTML =
+            '';
+        xhttp.onreadystatechange = function () {
+            console.log(this.responseText);
+            document.getElementById("demo").innerHTML =
+                this.responseText;
+        }
+        xhttp.open("GET", "http://localhost:30001/profile", true);
+        xhttp.send();
+    });
+</script>
+
+</html>

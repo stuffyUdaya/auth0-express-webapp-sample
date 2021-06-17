@@ -1,7 +1,11 @@
 var router = require('express').Router();
 
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Auth0 Webapp sample Nodejs' });
+  res.sendFile(__dirname + '/index.html');
+});
+
+router.get('/profile', (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
 });
 
 module.exports = router;
